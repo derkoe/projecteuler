@@ -1,5 +1,3 @@
-;;; A bit slow but it works ...
-
 (defn are-all-divisible? [^long number
                           ^long max]
   (or
@@ -13,7 +11,7 @@
 
 (defn euler4 []
   (first
-    (drop-while #(not (are-all-divisible? % 20)) (rest (range)))
+    (drop-while #(not (are-all-divisible? % 20)) (range 20 1000000000 20))
   )
 )
 
