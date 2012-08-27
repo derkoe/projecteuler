@@ -9,8 +9,12 @@
   (map #(Character/getNumericValue %) (str n))
 )
 
-(def euler29
-  (filter (fn [n] (= n (reduce + (map #(exp % 5) (digits n))))) (range 2 354295))
+(defn num-eq-sum-fith-power-of-digits [n]
+  (= n (reduce + (map #(exp % 5) (digits n))))
 )
 
-(println (reduce + euler29))
+(def euler30
+  (reduce + (filter num-eq-sum-fith-power-of-digits (range 2 354295)))
+)
+
+(println euler30)
