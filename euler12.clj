@@ -2,13 +2,14 @@
 ; What is the value of the first triangle number to have over five hundred divisors?
 
 (defn factors [x]
-"integer -> vector[integers]"
-  (loop [xf [] i 2]
-    (if (> (* i i) x)
-      (vec (sort (distinct xf)))
-      (if (zero? (rem x i))
-        (recur (conj xf i (/ x i)) (inc i))
-        (recur xf (inc i))))))
+  (loop [xf #{} i 2]
+    (cond 
+      (> (* i i) x) xf
+      (zero? (rem x i)) (recur (conj xf i (/ x i)) (inc i))
+      :else (recur xf (inc i))
+    )
+  )
+)
 
 (defn count-factors [num]
   (count (factors num))
