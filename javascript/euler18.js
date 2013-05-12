@@ -14,21 +14,20 @@ var triangle = [[75],
 [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
 [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]];
 
-function calcMaxPathValue(row, col) {
-  if (row === 0) {
-    return triangle[0][0];
-  } 
-  var curVal = triangle[row][col];
-  if (col === 0) {
-    return curVal + calcMaxPathValue(row - 1, col);
-  } else if (col === triangle[row].length - 1) {
-    return curVal + calcMaxPathValue(row - 1, col - 1);
-  } else {
-    return curVal + Math.max(calcMaxPathValue(row - 1, col - 1), calcMaxPathValue(row - 1, col));
+function maxPathSum(triangle) {
+  var calcMaxPathValue = function(row, col) {
+    if (row === 0) {
+      return triangle[0][0];
+    } 
+    var curVal = triangle[row][col];
+    if (col === 0) {
+      return curVal + calcMaxPathValue(row - 1, col);
+    } else if (col === triangle[row].length - 1) {
+      return curVal + calcMaxPathValue(row - 1, col - 1);
+    } else {
+      return curVal + Math.max(calcMaxPathValue(row - 1, col - 1), calcMaxPathValue(row - 1, col));
+    }
   }
-}
-
-function euler18() {
   var i, max = 0;
   for (i = 0; i < triangle[triangle.length - 1].length; i++) {
     max = Math.max(max, calcMaxPathValue(triangle.length - 1, i));
@@ -36,4 +35,4 @@ function euler18() {
   return max;
 }
 
-console.log(euler18());
+console.log(maxPathSum(triangle));
